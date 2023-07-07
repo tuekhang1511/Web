@@ -33,6 +33,20 @@
                 {% endif %}
             </div>
         </div>
+        <div class="py-6">
+            <div class="bg-teal-500">
+                
+                
+                <!-- Add your other content here -->
+
+                {% if lesson.context %}
+                    <p class="text-gray-700 text-gray-500 text-center">
+                        <strong class="">Context:</strong><br>
+                        {{ lesson.context }}
+                    </p>
+                {% endif %}
+            </div>
+        </div>
         <div class="flex flex-row py-6">
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
                 {% for trycode in trycodes %}
