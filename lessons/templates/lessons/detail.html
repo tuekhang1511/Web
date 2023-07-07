@@ -1,0 +1,61 @@
+{% extends 'core/base.html' %}
+
+{% block title %}{{ item.name }}{% endblock %}
+
+{% block content %}
+
+    <div class=" flex flex-col h-screen">
+        <div class="">
+            <div class="bg-teal-500">
+                <h1 class="mb-6 text-3xl text-center">{{ lesson.name }}</h1>
+                
+                <!-- Add your other content here -->
+
+                {% if lesson.context %}
+                    <p class="text-gray-700 text-gray-500 text-center">
+                        <strong class="">Context:</strong><br>
+                        {{ lesson.context }}
+                    </p>
+                {% endif %}
+            </div>
+        </div>
+        <div class="flex flex-row py-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+                {% for trycode in trycodes %}
+                    <div>   
+                        <div class="p-6 bg-white rounded-b-xl">
+                            <h2 class="text-2xl">{{trycode.name}}</h2>
+                            <p class="text-gray-500">Intro: {{trycode.intro}}</p>
+                        </div>
+                        <a href="{% url 'try_code:detail' trycode.id %}" class="px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">Try code</a>
+                    </div>
+                    
+                {% endfor %}
+            </div>
+            
+
+        </div>
+        {% if lesson.problems.all%}
+            <div class="px-6 py-3">
+                <a href="{% url 'problems:problems' lesson.id %}" class="px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700 inline-block">Problems</a>
+            </div>
+        {% endif %}
+    </div>
+
+
+<script>
+    var editor = CodeMirror.fromTextArea(document.getElementById("code-editor"), {
+        lineNumbers: true,
+        tabSize: 4,
+        indentWithTabs: true,
+        mode: "python",
+        theme: "dracula",
+        closeBrackets: true,
+        lineWrapping: true,
+        autocompletion: true,
+        bracketMatching: true,
+    });
+</script>
+
+
+{% endblock %}
