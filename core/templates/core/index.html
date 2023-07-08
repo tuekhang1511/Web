@@ -5,11 +5,17 @@
 {% block content %}
 <div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
 
-    <div class="min-h-screen flex flex-col justify-center items-center px-4 py-12">
-        <h1 class="text-4xl font-bold text-teal-500 mb-8">Welcome to Code!</h1>
-        <p class="text-lg text-gray-700 text-center mb-8">Code is your go-to platform for learning Python programming. Whether you are a beginner or an experienced coder, we've got you covered.</p>
-        <a href="{% url 'lessons:lessons' %}" class="bg-teal-500 hover:bg-teal-600 text-white font-semibold px-8 py-4 rounded-lg shadow-md transition-colors duration-300">Start Learning</a>
-      </div>
+    <div class="flex flex-col justify-center items-center px-4 py-12">
+        <div class="flex flex-col justify-center items-center">
+            <h1 class="text-4xl font-bold text-teal-500 mb-8">Welcome to Code!</h1>
+            <p class="text-lg text-gray-700 text-center mb-8">Code is your go-to platform for learning Python programming. Whether you are a beginner or an experienced coder, we've got you covered.</p>
+            <a href="{% url 'lessons:lessons' %}" class="bg-teal-500 hover:bg-teal-600 text-white font-semibold px-8 py-4 rounded-lg shadow-md transition-colors duration-300">Start Learning</a>
+        </div>
+        <div class="flex flex-col justify-center items-center py-6">
+            <p class="text-lg text-gray-700 text-center mb-8">Are you confident enough in your skills to showcase your work on the web? Start practicing now!</p>
+            <a href="{% url 'problems:all_problems' %}" class="bg-cyan-500 hover:bg-cyan-600 text-white font-semibold px-8 py-4 rounded-lg shadow-md transition-colors duration-300">Start Practicing</a>
+        </div>
+    </div>
 
 </div>
 {% endblock %}

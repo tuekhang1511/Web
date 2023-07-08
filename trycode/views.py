@@ -4,10 +4,10 @@ from lessons.models import Lesson
 
 import subprocess
 
-def try_code(request, id):
+def try_code(request, iden):
     lessons = Lesson.objects.all()
-    try_code_obj = TryCode.objects.get(pk=id)
-    code = TryCode.objects.get(pk=id).detail
+    try_code_obj = TryCode.objects.get(identification=iden)
+    code = TryCode.objects.get(identification=iden).detail
     result = ''
     output=''
     if request.method == 'POST':

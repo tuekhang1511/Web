@@ -17,7 +17,7 @@ import subprocess
 def detail(request, pk):
     lessons = Lesson.objects.all()
     lesson = Lesson.objects.get(pk=pk)
-    detail_html = "lesson_detail_" + str(lesson.id)
+    detail_html = "lesson_detail_" + str(lesson.identification)
     trycodes = TryCode.objects.filter(in_lesson=lesson)
     if request.method == 'POST':
         code = request.POST.get('code')

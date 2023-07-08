@@ -48,7 +48,7 @@
           <div class="basis-1/6">
             <p class="font-semibold text-center py-4">Lessons</p>
             <div class="py-4 gap-4">
-              <ul class="">
+              <ul class="px-4">
                 {% for lesson in lessons %}
                   <a href="{% url 'lessons:detail' lesson.id %}">
                     <li class="py-4 px-6 rounded-xl bg-lime-400 rounded-xl hover:bg-lime-500 inline-block" style="display: block; margin-bottom: 10px;">
@@ -60,7 +60,7 @@
             </div>
           </div>
           <div class="basis-5/6 py-3 px-6">            
-            <div class="max-w-3xl mx-auto py-10 px-6 bg-white p-6 rounded-lg shadow-md">
+            <div class="max-w mx-auto py-10 px-6 bg-white p-6 rounded-lg shadow-md">
                 <h1 class="text-4xl font-bold mb-6">What is Python?</h1>
                 <p class="text-lg mb-6">Python is a popular programming language. It was created by Guido van Rossum and released in 1991.</p>
                 <p class="text-lg mb-6">It is used for:</p>
@@ -93,6 +93,21 @@
                     <p class="text-lg mb-6">Python uses new lines to complete a command, as opposed to other programming languages which often use semicolons or parentheses.</p>
                     <p class="text-lg mb-6">Python relies on indentation, using whitespace, to define scope; such as the scope of loops, functions, and classes. Other programming languages often use curly-brackets for this purpose.</p>
                     
+					<h2 class="text-2xl font-bold mb-4">Casting</h2>
+                    <p class="text-lg mb-6">If you want to specify the data type of a variable, this can be done with casting.</p>
+
+                    <div class="flex flex-row py-2">
+                        <div class="border border-gray-300 rounded-xl p-4 margin-top:10px">
+                            {% for trycode in trycodes %}
+                                {% if trycode.identification == 0 %}
+                                    <p class="text-gray-500">{{trycode.intro}}</p>
+                                    <h2 class="text-2xl">{{trycode.summary}}</h2>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>       
+                    <a href="{% url 'try_code:detail' 0 %}" class="px-6 py-3 text-lg font-semibold bg-lime-500 text-white rounded-xl hover:bg-lime-700 margin-top:40px text-center">Try code</a>
+
                     {% if lesson.problems.all%}
                         <div class="px-6 py-3">
                             <a href="{% url 'problems:problems' lesson.id %}" class="px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700 inline-block">Practice</a>

@@ -9,7 +9,7 @@
 
         <script src="https://cdn.tailwindcss.com"></script>
 
-        <title>Lesson 2 | Code</title>
+        <title>Lesson 3 | Code</title>
         
         <script src="{% static 'codemirror/lib/codemirror.js' %}"></script>
         <link href="{% static 'codemirror/lib/codemirror.css' %}" rel="stylesheet"/>
@@ -62,64 +62,99 @@
           <div class="basis-5/6 py-3 px-6">            
             <div class="max-w mx-auto py-10 px-6">
                 <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h1 class="text-3xl font-bold mb-4">Python Comments</h1>
-                    <p class="text-lg mb-6">Comments can be used to explain Python code.</p>
-                    <p class="text-lg mb-6">Comments can be used to make the code more readable.</p>
-                    <p class="text-lg mb-6">Comments can be used to prevent execution when testing code.</p>
+                    <h1 class="text-3xl font-bold mb-4">Python Variables</h1>
+                    <h2 class="text-2xl font-bold mb-4">Variables</h2>
+                    <p class="text-lg mb-6">Variables are containers for storing data values.</p>
+                    <h2 class="text-2xl font-bold mb-4">Creating Variables</h2>
+                    <p class="text-lg mb-6">Python has no command for declaring a variable.</p>
+                    <p class="text-lg mb-6">A variable is created the moment you first assign a value to it.</p>
                     
-                    <h2 class="text-2xl font-bold mb-4">Creating a Comment</h2>
-                    <p class="text-lg mb-6">Comments start with a <code class="bg-gray-200 p-1 rounded">#</code>, and Python will ignore them:</p>
                     <div class="flex flex-row py-2">
                         <div class="border border-gray-300 rounded-xl p-4 margin-top:10px">
                             {% for trycode in trycodes %}
-                                {% if trycode.identification == 1 %}
+                                {% if trycode.identification == 5 %}
                                     <p class="text-gray-500">{{trycode.intro}}</p>
                                     <h2 class="text-2xl">{{trycode.summary|linebreaksbr}}</h2>
                                 {% endif %}
                             {% endfor %}
                         </div>
                     </div>       
-                    <a href="{% url 'try_code:detail' 1 %}" class="px-6 py-3 text-lg font-semibold bg-lime-500 text-white rounded-xl hover:bg-lime-700 margin-top:40px text-center">Try code</a>
+                    <a href="{% url 'try_code:detail' 5 %}" class="px-6 py-3 text-lg font-semibold bg-lime-500 text-white rounded-xl hover:bg-lime-700 margin-top:40px text-center">Try code</a>
 
-                    <p class="text-lg py-4 mb-6">Comments can be placed at the end of a line, and Python will ignore the rest of the line:</p>
+                    <p class="text-lg py-4 mb-6">Variables do not need to be declared with any particular type, and can even change type after they have been set.</p>
+
                     <div class="flex flex-row py-2">
                         <div class="border border-gray-300 rounded-xl p-4 margin-top:10px">
                             {% for trycode in trycodes %}
-                                {% if trycode.identification == 2 %}
+                                {% if trycode.identification == 6 %}
                                     <p class="text-gray-500">{{trycode.intro}}</p>
                                     <h2 class="text-2xl">{{trycode.summary|linebreaksbr}}</h2>
                                 {% endif %}
                             {% endfor %}
                         </div>
                     </div>       
-                    <a href="{% url 'try_code:detail' 2 %}" class="px-6 py-3 text-lg font-semibold bg-lime-500 text-white rounded-xl hover:bg-lime-700 mt-4 text-center">Try code</a>
-                    
-                    <p class="text-lg mb-6 py-4">A comment does not have to be text that explains the code; it can also be used to prevent Python from executing code:</p>
+                    <a href="{% url 'try_code:detail' 6 %}" class="px-6 py-3 text-lg font-semibold bg-lime-500 text-white rounded-xl hover:bg-lime-700 margin-top:40px text-center">Try code</a>
+
+                    <h2 class="text-2xl font-bold mb-4 py-4">Casting</h2>
+                    <p class="text-lg mb-6">If you want to specify the data type of a variable, this can be done with casting.</p>
+
                     <div class="flex flex-row py-2">
                         <div class="border border-gray-300 rounded-xl p-4 margin-top:10px">
                             {% for trycode in trycodes %}
-                                {% if trycode.identification == 3 %}
+                                {% if trycode.identification == 7 %}
                                     <p class="text-gray-500">{{trycode.intro}}</p>
                                     <h2 class="text-2xl">{{trycode.summary|linebreaksbr}}</h2>
                                 {% endif %}
                             {% endfor %}
                         </div>
                     </div>       
-                    <a href="{% url 'try_code:detail' 3 %}" class="px-6 py-3 text-lg font-semibold bg-lime-500 text-white rounded-xl hover:bg-lime-700 text-center">Try code</a>
-                    
-                    <h2 class="text-2xl font-bold mb-4 py-4">Multiline Comments</h2>
-                    <p class="text-lg mb-6">Python does not have a specific syntax for multiline comments. However, you can use a multiline string to achieve a similar effect:</p>
+                    <a href="{% url 'try_code:detail' 7 %}" class="px-6 py-3 text-lg font-semibold bg-lime-500 text-white rounded-xl hover:bg-lime-700 margin-top:40px text-center">Try code</a>
+
+                    <h2 class="text-2xl font-bold mb-4 py-4">Get the Type</h2>
+                    <p class="text-lg mb-6">You can get the data type of a variable with the <code class="bg-gray-200 p-1 rounded">type()</code> function.</p>
+
                     <div class="flex flex-row py-2">
                         <div class="border border-gray-300 rounded-xl p-4 margin-top:10px">
                             {% for trycode in trycodes %}
-                                {% if trycode.identification == 4 %}
+                                {% if trycode.identification == 8 %}
                                     <p class="text-gray-500">{{trycode.intro}}</p>
                                     <h2 class="text-2xl">{{trycode.summary|linebreaksbr}}</h2>
                                 {% endif %}
                             {% endfor %}
                         </div>
                     </div>       
-                    <a href="{% url 'try_code:detail' 4 %}" class="px-6 py-3 text-lg font-semibold bg-lime-500 text-white rounded-xl hover:bg-lime-700 text-center">Try code</a>
+                    <a href="{% url 'try_code:detail' 8 %}" class="px-6 py-3 text-lg font-semibold bg-lime-500 text-white rounded-xl hover:bg-lime-700 margin-top:40px text-center">Try code</a>
+
+                    <h2 class="text-2xl font-bold mb-4 py-4">Single or Double Quotes?</h2>
+                    <p class="text-lg mb-6">String variables can be declared either by using single or double quotes:</p>
+
+                    <div class="flex flex-row py-2">
+                        <div class="border border-gray-300 rounded-xl p-4 margin-top:10px">
+                            {% for trycode in trycodes %}
+                                {% if trycode.identification == 9 %}
+                                    <p class="text-gray-500">{{trycode.intro}}</p>
+                                    <h2 class="text-2xl">{{trycode.summary|linebreaksbr}}</h2>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>       
+                    <a href="{% url 'try_code:detail' 9 %}" class="px-6 py-3 text-lg font-semibold bg-lime-500 text-white rounded-xl hover:bg-lime-700 margin-top:40px text-center">Try code</a>
+
+                    <h2 class="text-2xl font-bold mb-4 py-4">Case-Sensitive</h2>
+                    <p class="text-lg mb-6">Variable names are case-sensitive.</p>
+
+                    <div class="flex flex-row py-2">
+                        <div class="border border-gray-300 rounded-xl p-4 margin-top:10px">
+                            {% for trycode in trycodes %}
+                                {% if trycode.identification == 10 %}
+                                    <p class="text-gray-500">{{trycode.intro}}</p>
+                                    <h2 class="text-2xl">{{trycode.summary|linebreaksbr}}</h2>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>       
+                    <a href="{% url 'try_code:detail' 10 %}" class="px-6 py-3 text-lg font-semibold bg-lime-500 text-white rounded-xl hover:bg-lime-700 margin-top:40px text-center">Try code</a>
+
                   </div>
                     {% if lesson.problems.all%}
                         <div class="px-6 py-3">
@@ -154,6 +189,3 @@
     </body>
 </html>
 
-<!-- body, html {
-    height: 100%;
-  } -->
