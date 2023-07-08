@@ -1,46 +1,159 @@
-{% extends 'core/base.html' %}
+{% load static %}
 
-{% block title %}{{ item.name }}{% endblock %}
 
-{% block content %}
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <div class=" flex flex-col h-screen">
-        <div class="">
-            <div class="bg-teal-500">
-                <h1 class="mb-6 text-3xl text-center">{{ lesson.name }}</h1>
-                
-                <!-- Add your other content here -->
+        <script src="https://cdn.tailwindcss.com"></script>
 
-                {% if lesson.context %}
-                    <p class="text-gray-700 text-gray-500 text-center">
-                        <strong class="">Context:</strong><br>
-                        {{ lesson.context }}
-                    </p>
-                {% endif %}
-            </div>
+        <title>Lesson 2 | Code</title>
+        
+        <script src="{% static 'codemirror/lib/codemirror.js' %}"></script>
+        <link href="{% static 'codemirror/lib/codemirror.css' %}" rel="stylesheet"/>
+        <script src="{% static 'codemirror/mode/python/python.js' %}"></script>
+        <link href="{% static 'codemirror/theme/dracula.css' %}" rel="stylesheet"/>
+
+        <!-- <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+        <script defer src="https://pyscript.net/alpha/pyscript.js"></script> -->
+    </head>
+
+    <style>
+        html, body {
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+        }
+    
+        .content {
+          flex: 1;
+        }
+      </style>
+    </head>
+    
+    <body class="flex flex-col">
+      <nav class="py-6 px-6 flex justify-between items-center border-b border-gray-200">
+        <a href="/" class="text-xl font-semibold">Code</a>
+      
+        <div class="space-x-6 flex flex-wrap items-center">
+            <a href="{% url 'problems:all_problems' %}" class="px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">Practices</a>
+            <a href="{% url 'lessons:lessons' %}" class="px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">Lessons</a>
         </div>
-        <div class="flex flex-row py-6">
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
-                {% for trycode in trycodes %}
-                    <div>   
-                        <div class="p-6 bg-white rounded-b-xl">
-                            <h2 class="text-2xl">{{trycode.name}}</h2>
-                            <p class="text-gray-500">Intro: {{trycode.intro}}</p>
-                        </div>
-                        <a href="{% url 'try_code:detail' trycode.id %}" class="px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">Try code</a>
-                    </div>
-                    
+      </nav>
+    
+      <div class="grid grid-rows-7 content">
+        <div class="flex flex-row row-span-6">
+          <div class="basis-1/6">
+            <p class="font-semibold text-center py-4">Lessons</p>
+            <div class="py-4 gap-4">
+              <ul class="">
+                {% for lesson in lessons %}
+                  <a href="{% url 'lessons:detail' lesson.id %}">
+                    <li class="py-4 px-6 rounded-xl bg-lime-400 rounded-xl hover:bg-lime-500 inline-block" style="display: block; margin-bottom: 10px;">
+                      {{ lesson.name }}
+                    </li>
+                  </a>
                 {% endfor %}
+              </ul>
             </div>
-            
+          </div>
+          <div class="basis-5/6 py-3 px-6">            
+            <div class="max-w-3xl mx-auto py-10 px-6">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h1 class="text-3xl font-bold mb-4">Python Comments</h1>
+                    <p class="text-lg mb-6">Comments can be used to explain Python code.</p>
+                    <p class="text-lg mb-6">Comments can be used to make the code more readable.</p>
+                    <p class="text-lg mb-6">Comments can be used to prevent execution when testing code.</p>
+                    
+                    <h2 class="text-2xl font-bold mb-4">Creating a Comment</h2>
+                    <p class="text-lg mb-6">Comments start with a <code class="bg-gray-200 p-1 rounded">#</code>, and Python will ignore them:</p>
+                    <div class="flex flex-row py-2">
+                        <div class="border border-gray-300 rounded-xl p-4 margin-top:10px">
+                            {% for trycode in trycodes %}
+                                {% if trycode.id == 4 %}
+                                    <p class="text-gray-500">{{trycode.intro}}</p>
+                                    <h2 class="text-2xl">{{trycode.detail}}</h2>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>       
+                    <a href="{% url 'try_code:detail' 4 %}" class="px-6 py-3 text-lg font-semibold bg-lime-500 text-white rounded-xl hover:bg-lime-700 margin-top:40px text-center">Try code</a>
 
+                    <p class="text-lg py-4 mb-6">Comments can be placed at the end of a line, and Python will ignore the rest of the line:</p>
+                    <div class="flex flex-row py-2">
+                        <div class="border border-gray-300 rounded-xl p-4 margin-top:10px">
+                            {% for trycode in trycodes %}
+                                {% if trycode.id == 5 %}
+                                    <p class="text-gray-500">{{trycode.intro}}</p>
+                                    <h2 class="text-2xl">{{trycode.detail}}</h2>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>       
+                    <a href="{% url 'try_code:detail' 5 %}" class="px-6 py-3 text-lg font-semibold bg-lime-500 text-white rounded-xl hover:bg-lime-700 mt-4 text-center">Try code</a>
+                    
+                    <p class="text-lg mb-6 py-4">A comment does not have to be text that explains the code; it can also be used to prevent Python from executing code:</p>
+                    <div class="flex flex-row py-2">
+                        <div class="border border-gray-300 rounded-xl p-4 margin-top:10px">
+                            {% for trycode in trycodes %}
+                                {% if trycode.id == 6 %}
+                                    <p class="text-gray-500">{{trycode.intro}}</p>
+                                    <h2 class="text-2xl">{{trycode.detail}}</h2>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>       
+                    <a href="{% url 'try_code:detail' 6 %}" class="px-6 py-3 text-lg font-semibold bg-lime-500 text-white rounded-xl hover:bg-lime-700 text-center">Try code</a>
+                    
+                    <h2 class="text-2xl font-bold mb-4 py-4">Multiline Comments</h2>
+                    <p class="text-lg mb-6">Python does not have a specific syntax for multiline comments. However, you can use a multiline string to achieve a similar effect:</p>
+                    <div class="flex flex-row py-2">
+                        <div class="border border-gray-300 rounded-xl p-4 margin-top:10px">
+                            {% for trycode in trycodes %}
+                                {% if trycode.id == 7 %}
+                                    <p class="text-gray-500">{{trycode.intro}}</p>
+                                    <h2 class="text-2xl">{{trycode.detail}}</h2>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>       
+                    <a href="{% url 'try_code:detail' 7 %}" class="px-6 py-3 text-lg font-semibold bg-lime-500 text-white rounded-xl hover:bg-lime-700 text-center">Try code</a>
+                  </div>
+                    {% if lesson.problems.all%}
+                        <div class="px-6 py-3">
+                            <a href="{% url 'problems:problems' lesson.id %}" class="px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700 inline-block">Practice</a>
+                        </div>
+                    {% endif %}
+                        
+                </div>
+                
+                
+                
+            </div>
+          </div>
         </div>
-        {% if lesson.problems.all%}
-            <div class="px-6 py-3">
-                <a href="{% url 'problems:problems' lesson.id %}" class="px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700 inline-block">Problems</a>
-            </div>
-        {% endif %}
-    </div>
+      </div>
+    
+      <footer class="py-6 px-6 flex justify-between bg-gray-800 text-white">
+        <div class="w-2/3 pr-10">
+          <h3 class="mb-5 font-semibold text-gray-400">About</h3>
+          <p class="text-lg text-gray-500"></p>
+        </div>
+        <div class="w-1/3">
+          <h3 class="mb-5 font-semibold text-gray-400">Menu</h3>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-lg text-teal-500 hover:text-teal-700">About</a></li>
+            <li><a href="#" class="text-lg text-teal-500 hover:text-teal-700">Contact</a></li>
+            <li><a href="#" class="text-lg text-teal-500 hover:text-teal-700">Privacy policy</a></li>
+            <li><a href="#" class="text-lg text-teal-500 hover:text-teal-700">Term of use</a></li>
+          </ul>
+        </div>
+      </footer>
+    </body>
+</html>
 
-
-{% endblock %}
+<!-- body, html {
+    height: 100%;
+  } -->

@@ -9,7 +9,7 @@
 
         <script src="https://cdn.tailwindcss.com"></script>
 
-        <title>{% block title %}{% endblock %} | Puddle</title>
+        <title>{% block title %}{% endblock %} | Code</title>
         
         <script src="{% static 'codemirror/lib/codemirror.js' %}"></script>
         <link href="{% static 'codemirror/lib/codemirror.css' %}" rel="stylesheet"/>
@@ -20,60 +20,67 @@
         <script defer src="https://pyscript.net/alpha/pyscript.js"></script> -->
     </head>
 
+    <style>
+        html, body {
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+        }
+    
+        .content {
+          flex: 1;
+        }
+      </style>
+    </head>
+    
     <body class="flex flex-col">
-        <nav class="py-6 px-6 flex justify-between items-center border-b border-gray-200">
-            <a href="/" class="text-xl font-semibold">Puddle</a>
-        
-            <div class="space-x-6 flex flex-wrap items-center">
-                <!-- <a href="#" class="text-lg font-semibold hover:text-gray-500">Problems</a> -->
-                <!-- <a href="#" class="px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">Inbox</a> -->
-                <a href="{% url 'lessons:lessons' %}" class="px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">Lessons</a>
-                <!-- <a href="#" class="px-6 py-3 text-lg font-semibold bg-blue-500 text-white rounded-xl hover:bg-gray-700">Logout</a> -->
-                
-                <!-- <a href="#" class="px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">Sign up</a>
-                <a href="#" class="px-6 py-3 text-lg font-semibold bg-gray-500 text-white rounded-xl hover:bg-gray-700">Log in</a> -->
-
-            </div>
-        </nav>
-        <div class="flex flex-row">
-            <div class="basis-1/6">
-                <p class="font-semibold text-center py-4">Lessons</p>
-                    <div class="py-4 gap-4">
-                        <ul class="">
-                            {% for lesson in lessons %}
-                            <a href="{% url 'lessons:detail' lesson.id %}">
-                                    <li class="py-4 px-6 rounded-xl bg-lime-400 rounded-xl hover:bg-lime-500 inline-block" style="display: block; margin-bottom: 10px;">
-                                        {{ lesson.name }}
-                                    </li>
-                            </a>
-                            {% endfor %}
-                        </ul>
-                    </div>
-            </div>
-            <div class="basis-5/6 py-3 px-6">            
-                {% block content %}
-                {% endblock %}
-            </div>
+      <nav class="py-6 px-6 flex justify-between items-center border-b border-gray-200">
+        <a href="/" class="text-xl font-semibold">Code</a>
+      
+        <div class="space-x-6 flex flex-wrap items-center">
+          <a href="{% url 'problems:all_problems' %}" class="px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">Practices</a>
+          <a href="{% url 'lessons:lessons' %}" class="px-6 py-3 text-lg font-semibold bg-cyan-500 text-white rounded-xl hover:bg-cyan-700">Lessons</a>
         </div>
-
-        <footer class="py-6 px-6 min-h-full flex justify-between bg-gray-800 relative z-10">
-            <div class="w-2/3 pr-10">
-                <h3 class="mb-5 font-semibold text-gray-400">About</h3>
-
-                <p class="text-lg text-gray-500">Bla bla bla.</p>
+      </nav>
+    
+      <div class="grid grid-rows-7 content">
+        <div class="flex flex-row row-span-6">
+          <div class="basis-1/6">
+            <p class="font-semibold text-center py-4">Lessons</p>
+            <div class="py-4 gap-4">
+              <ul class="">
+                {% for lesson in lessons %}
+                  <a href="{% url 'lessons:detail' lesson.id %}">
+                    <li class="py-4 px-6 rounded-xl bg-lime-400 rounded-xl hover:bg-lime-500 inline-block" style="display: block; margin-bottom: 10px;">
+                      {{ lesson.name }}
+                    </li>
+                  </a>
+                {% endfor %}
+              </ul>
             </div>
-
-            <div class="w-1/3">
-                <h3 class="mb-5 font-semibold text-gray-400">Menu</h3>
-
-                <ul class="space-y-2">
-                    <li><a href="#" class="text-lg text-teal-500 hover:text-teal-700">About</a></li>
-                    <li><a href="#" class="text-lg text-teal-500 hover:text-teal-700">Contact</a></li>
-                    <li><a href="#" class="text-lg text-teal-500 hover:text-teal-700">Privacy policy</a></li>
-                    <li><a href="#" class="text-lg text-teal-500 hover:text-teal-700">Term of use</a></li>
-                </ul>
-            </div>
-        </footer>
+          </div>
+          <div class="basis-5/6 py-3 px-6">            
+            {% block content %}
+            {% endblock %}
+          </div>
+        </div>
+      </div>
+    
+      <footer class="py-6 px-6 flex justify-between bg-gray-800 text-white">
+        <div class="w-2/3 pr-10">
+          <h3 class="mb-5 font-semibold text-gray-400">About</h3>
+          <p class="text-lg text-gray-500"></p>
+        </div>
+        <div class="w-1/3">
+          <h3 class="mb-5 font-semibold text-gray-400">Menu</h3>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-lg text-teal-500 hover:text-teal-700">About</a></li>
+            <li><a href="#" class="text-lg text-teal-500 hover:text-teal-700">Contact</a></li>
+            <li><a href="#" class="text-lg text-teal-500 hover:text-teal-700">Privacy policy</a></li>
+            <li><a href="#" class="text-lg text-teal-500 hover:text-teal-700">Term of use</a></li>
+          </ul>
+        </div>
+      </footer>
     </body>
 </html>
 

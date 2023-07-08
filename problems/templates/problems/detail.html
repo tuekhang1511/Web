@@ -38,6 +38,14 @@
             
         </div>
     </div>
+    <div class="margin-top:10px">
+        {% if solved %}
+        <h1>Success</h1>
+        {% endif %}
+        {% if solved == False %}
+        <h1>{{problem.hint}}</h1>
+        {% endif %}
+    </div>
 </div>
 
 <script>

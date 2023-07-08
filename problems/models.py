@@ -20,6 +20,7 @@ class Problem(models.Model):
     category = models.ForeignKey(Category, related_name='problems', on_delete=models.CASCADE)
     in_lesson = models.ForeignKey(Lesson, blank=True,null=True, related_name='problems', on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
+    problem_initial = models.TextField(blank=True,null=True)
     problem_description = models.TextField(blank=True,null=True)
     word_in_solution_code = models.TextField(blank=True,null=True)
     hint = models.TextField(blank=True,null=True, default='')

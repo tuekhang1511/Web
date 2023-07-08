@@ -71,7 +71,7 @@
         </nav>
 
         <div class="">
-            <div class="grid grid-cols-3 gap-3">
+            <div class="px-4 grid grid-cols-3 gap-3">
                 {% for problem in problems %}
                     <div>
                         <a href="{% url 'problems:problem' lesson.id problem.id %}">

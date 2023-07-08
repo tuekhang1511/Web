@@ -1,74 +1,131 @@
-{% extends 'core/base.html' %}
+{% load static %}
 
-{% block title %}{{ item.name }}{% endblock %}
 
-{% block content %}
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <div class=" flex flex-col h-screen">
-        <div class="">
-            <div class="bg-teal-500">
-                <h1 class="mb-6 text-3xl text-center">{{ lesson.name }}</h1>
-                
-                <!-- Add your other content here -->
+        <script src="https://cdn.tailwindcss.com"></script>
 
-                {% if lesson.context %}
-                    <p class="text-gray-700 text-gray-500 text-center">
-                        <strong class="">Context:</strong><br>
-                        {{ lesson.context }}
-                    </p>
-                {% endif %}
-            </div>
+        <title>Lesson 1 | Code</title>
+        
+        <script src="{% static 'codemirror/lib/codemirror.js' %}"></script>
+        <link href="{% static 'codemirror/lib/codemirror.css' %}" rel="stylesheet"/>
+        <script src="{% static 'codemirror/mode/python/python.js' %}"></script>
+        <link href="{% static 'codemirror/theme/dracula.css' %}" rel="stylesheet"/>
+
+        <!-- <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+        <script defer src="https://pyscript.net/alpha/pyscript.js"></script> -->
+    </head>
+
+    <style>
+        html, body {
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+        }
+    
+        .content {
+          flex: 1;
+        }
+      </style>
+    </head>
+    
+    <body class="flex flex-col">
+      <nav class="py-6 px-6 flex justify-between items-center border-b border-gray-200">
+        <a href="/" class="text-xl font-semibold">Code</a>
+      
+        <div class="space-x-6 flex flex-wrap items-center">
+            <a href="{% url 'problems:all_problems' %}" class="px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">Practices</a>
+          	<a href="{% url 'lessons:lessons' %}" class="px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">Lessons</a>
         </div>
-        <div class="py-6">
-            <div class="bg-teal-500">
-                
-                
-                <!-- Add your other content here -->
-
-                {% if lesson.context %}
-                    <p class="text-gray-700 text-gray-500 text-center">
-                        <strong class="">Context:</strong><br>
-                        {{ lesson.context }}
-                    </p>
-                {% endif %}
-            </div>
-        </div>
-        <div class="py-6">
-            <div class="bg-teal-500">
-                
-                
-                <!-- Add your other content here -->
-
-                {% if lesson.context %}
-                    <p class="text-gray-700 text-gray-500 text-center">
-                        <strong class="">Context:</strong><br>
-                        {{ lesson.context }}
-                    </p>
-                {% endif %}
-            </div>
-        </div>
-        <div class="flex flex-row py-6">
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
-                {% for trycode in trycodes %}
-                    <div>   
-                        <div class="p-6 bg-white rounded-b-xl">
-                            <h2 class="text-2xl">{{trycode.name}}</h2>
-                            <p class="text-gray-500">Intro: {{trycode.intro}}</p>
-                        </div>
-                        <a href="{% url 'try_code:detail' trycode.id %}" class="px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">Try code</a>
-                    </div>
-                    
+      </nav>
+    
+      <div class="grid grid-rows-7 content">
+        <div class="flex flex-row row-span-6">
+          <div class="basis-1/6">
+            <p class="font-semibold text-center py-4">Lessons</p>
+            <div class="py-4 gap-4">
+              <ul class="">
+                {% for lesson in lessons %}
+                  <a href="{% url 'lessons:detail' lesson.id %}">
+                    <li class="py-4 px-6 rounded-xl bg-lime-400 rounded-xl hover:bg-lime-500 inline-block" style="display: block; margin-bottom: 10px;">
+                      {{ lesson.name }}
+                    </li>
+                  </a>
                 {% endfor %}
+              </ul>
             </div>
-            
-
+          </div>
+          <div class="basis-5/6 py-3 px-6">            
+            <div class="max-w-3xl mx-auto py-10 px-6 bg-white p-6 rounded-lg shadow-md">
+                <h1 class="text-4xl font-bold mb-6">What is Python?</h1>
+                <p class="text-lg mb-6">Python is a popular programming language. It was created by Guido van Rossum and released in 1991.</p>
+                <p class="text-lg mb-6">It is used for:</p>
+                <ul class="list-disc list-inside mb-6">
+                    <li>Web development (server-side)</li>
+                    <li>Software development</li>
+                    <li>Mathematics</li>
+                    <li>System scripting</li>
+                </ul>
+                <h2 class="text-3xl font-bold mb-4">What can Python do?</h2>
+                    <p class="text-lg mb-6">Python can be used on a server to create web applications.</p>
+                    <p class="text-lg mb-6">Python can be used alongside software to create workflows.</p>
+                    <p class="text-lg mb-6">Python can connect to database systems. It can also read and modify files.</p>
+                    <p class="text-lg mb-6">Python can be used to handle big data and perform complex mathematics.</p>
+                    <p class="text-lg mb-6">Python can be used for rapid prototyping or for production-ready software development.</p>
+    
+                    <h2 class="text-3xl font-bold mb-4">Why Python?</h2>
+                    <p class="text-lg mb-6">Python works on different platforms (Windows, Mac, Linux, Raspberry Pi, etc).</p>
+                    <p class="text-lg mb-6">Python has a simple syntax similar to the English language.</p>
+                    <p class="text-lg mb-6">Python has syntax that allows developers to write programs with fewer lines than some other programming languages.</p>
+                    <p class="text-lg mb-6">Python runs on an interpreter system, meaning that code can be executed as soon as it is written. This means that prototyping can be very quick.</p>
+                    <p class="text-lg mb-6">Python can be treated in a procedural way, an object-oriented way, or a functional way.</p>
+    
+                    <h2 class="text-3xl font-bold mb-4">Good to know</h2>
+                    <p class="text-lg mb-6">The most recent major version of Python is Python 3, which we shall be using in this tutorial. However, Python 2, although not being updated with anything other than security updates, is still quite popular.</p>
+                    <p class="text-lg mb-6">In this tutorial, Python will be written in a text editor. It is possible to write Python in an Integrated Development Environment, such as Thonny, Pycharm, Netbeans, or Eclipse, which are particularly useful when managing larger collections of Python files.</p>
+    
+                    <h2 class="text-3xl font-bold mb-4">Python Syntax compared to other programming languages</h2>
+                    <p class="text-lg mb-6">Python was designed for readability and has some similarities to the English language with influence from mathematics.</p>
+                    <p class="text-lg mb-6">Python uses new lines to complete a command, as opposed to other programming languages which often use semicolons or parentheses.</p>
+                    <p class="text-lg mb-6">Python relies on indentation, using whitespace, to define scope; such as the scope of loops, functions, and classes. Other programming languages often use curly-brackets for this purpose.</p>
+                    
+                    {% if lesson.problems.all%}
+                        <div class="px-6 py-3">
+                            <a href="{% url 'problems:problems' lesson.id %}" class="px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700 inline-block">Practice</a>
+                        </div>
+                    {% endif %}
+                        
+                </div>
+                
+                
+                
+            </div>
+          </div>
         </div>
-        {% if lesson.problems.all%}
-            <div class="px-6 py-3">
-                <a href="{% url 'problems:problems' lesson.id %}" class="px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700 inline-block">Problems</a>
-            </div>
-        {% endif %}
-    </div>
+      </div>
+    
+      <footer class="py-6 px-6 flex justify-between bg-gray-800 text-white">
+        <div class="w-2/3 pr-10">
+          <h3 class="mb-5 font-semibold text-gray-400">About</h3>
+          <p class="text-lg text-gray-500"></p>
+        </div>
+        <div class="w-1/3">
+          <h3 class="mb-5 font-semibold text-gray-400">Menu</h3>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-lg text-teal-500 hover:text-teal-700">About</a></li>
+            <li><a href="#" class="text-lg text-teal-500 hover:text-teal-700">Contact</a></li>
+            <li><a href="#" class="text-lg text-teal-500 hover:text-teal-700">Privacy policy</a></li>
+            <li><a href="#" class="text-lg text-teal-500 hover:text-teal-700">Term of use</a></li>
+          </ul>
+        </div>
+      </footer>
+    </body>
+</html>
 
-
-{% endblock %}
+<!-- body, html {
+    height: 100%;
+  } -->

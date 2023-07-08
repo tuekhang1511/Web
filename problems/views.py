@@ -28,6 +28,25 @@ def problems(request, pk):
     }
     return render(request, 'problems/problems.html',context)
 
+def all_problems(request):
+    lessons = Lesson.objects.all()
+    problems = Problem.objects.all()
+    query = request.GET.get('query', '')
+    category_id = request.GET.get('category', 0)
+    categories = Category.objects.all()
+    if category_id:
+        problems = problems.filter(category_id=category_id)
+    if query:
+        problems = problems.filter(Q(name__icontains=query) | Q(problem_description__icontains=query))
+
+    context = {
+        'lessons' : lessons,
+        'problems' : problems,
+        'query': query,
+        'categories': categories,
+    }
+    return render(request, 'problems/all_problems.html',context)
+
 import subprocess
 
 def detail(request, pk, id):
@@ -35,9 +54,10 @@ def detail(request, pk, id):
     lesson = Lesson.objects.get(pk=pk)
     problem = Problem.objects.filter(in_lesson=lesson).get(pk=id)
     word_in_solution_code = problem.word_in_solution_code.split(',')
-    code = ''
+    code = problem.problem_initial
     result = ''
     output=''
+    solved = None
     if request.method == 'POST':
         code = request.POST.get('code')
         result = subprocess.run(['python', '-c', code], capture_output=True, text=True)
@@ -49,20 +69,26 @@ def detail(request, pk, id):
     output_text = ''
     count = 0
     output_list = output.split('<br>')
-    for element in output_list:
-        output_text += element
-    if output_text == problem.result:
-        for word in word_in_solution_code:
-            if word in code:
-                count += 1
+    if output != '':
+        for element in output_list:
+            output_text += element
+        if output_text == problem.result:
+            for word in word_in_solution_code:
+                if word in code:
+                    count += 1
             if count == len(word_in_solution_code):
+                solved = True
                 print("Success")
+            else:
+                solved = False
+        else:
+            solved = False
                 
     
     context = {
         'problem' : problem,
         'lessons' : lessons,
-        # 'form': form,
+        'solved': solved,
         'code': code,
         'output': output,
     }
