@@ -12,7 +12,9 @@
                 <div>
                     <a href="{% url 'lessons:detail' lesson.id %}">
                         <div>
-                            <img src="{{ lesson.image.url}}" class="rounded-t-xl">
+                            {% if lesson.image %}
+                                <img src="{{ lesson.image.url}}" class="rounded-t-xl">
+                            {% endif %}
                         </div>
 
                         <div class="p-6 bg-white rounded-b-xl">
